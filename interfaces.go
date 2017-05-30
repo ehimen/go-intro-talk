@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-demo/interfaces"
+	"go-intro-talk/interfaces"
 )
 
 func main() {

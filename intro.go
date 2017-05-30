@@ -5,18 +5,19 @@ import "fmt"
 var n = 1000
 
 func main() {
-	products := []int{3, 5}
+	multiples := []int{3, 5}
 
-	fmt.Println(sumOfProducts(products))
+	fmt.Println(sumOfMultiplesOf(multiples))
 }
 
-func sumOfProducts(numbers []int) int {
+func sumOfMultiplesOf(numbers []int) int {
+	//var total int = 0
 	total := 0
 
-	for i := 1; i < n; i++ {
-		for _, product := range numbers {
-			if i%product == 0 {
-				total += i
+	for potentialProduct := 1; potentialProduct < n; potentialProduct++ {
+		for _, multiple := range numbers {
+			if potentialProduct%multiple == 0 {
+				total += potentialProduct
 				break
 			}
 		}

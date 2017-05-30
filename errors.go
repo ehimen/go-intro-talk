@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// Build an array of our two functions.
+	// Build a map of our two functions.
 	// Quick & dirty polymorphism.
 	fns := map[string]func() (error, string){
 		"doSomethingValid":   doSomethingValid,

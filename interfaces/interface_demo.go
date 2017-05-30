@@ -18,3 +18,5 @@ type ConfigurableSpeaker struct {
 func (speaker ConfigurableSpeaker) Speak() string {
 	return speaker.Speech
 }
+
+type foo struct{}

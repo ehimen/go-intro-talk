@@ -9,38 +9,29 @@ import (
 func main() {
 	rand.Seed(time.Now().Unix())
 
-	// Create channels for communication
-	c1 := make(chan bool)
-	c2 := make(chan bool)
-	c3 := make(chan bool)
+	// Create channel for communication
+	ch := make(chan int)
 
-	// Start each goroutine
-	go doSomething(1, c1)
-	go doSomething(2, c2)
-	go doSomething(3, c3)
+	// Start three goroutines
+	go doSomething(1, ch)
+	go doSomething(2, ch)
+	go doSomething(3, ch)
 
-	done := 0
-
-	// While we haven't received a done signal
-	// from all go routines, continually check them
-	// and loop
-	for done < 3 {
-		select {
-		case <-c1:
-		case <-c2:
-		case <-c3:
-		}
-
-		done += 1
+	// While we haven't received a amountDone signal
+	// from all go routines, keep checking
+	for amountDone := 0; amountDone < 3; {
+		amountDone += <-ch
 	}
 }
 
-func doSomething(id int, done chan bool) {
+func doSomething(id int, done chan int) {
 	// Loop a random amount of times
-	amount := rand.Intn(9999999999)
+	amount := rand.Intn(999999999)
+
 	// At a random point during this,
-	// print where we are.
+	// print where we are
 	shoutAt := rand.Intn(amount)
+
 	fmt.Printf("Goroutine %d started. Looping up to %d\n", id, amount)
 
 	for i := 0; i < amount; i++ {
@@ -52,5 +43,5 @@ func doSomething(id int, done chan bool) {
 	fmt.Printf("Goroutine %d is done\n", id)
 
 	// Signal via our channel that we're done
-	done <- true
+	done <- 1
 }
